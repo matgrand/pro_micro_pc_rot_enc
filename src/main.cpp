@@ -198,34 +198,18 @@ void set_color(int idx, byte max_val=pwm_max_duty) {
 }
 
 void loop() {
+  // Update buttons, encoders and leds state
   update_buttons();
   update_encoders();
   set_color(enc1_val % 7);
 
-  // // serial print a recap of the values
-  // Serial.print("enc1: ");
-  // Serial.print(enc1_val);
-  // Serial.print(" enc2: ");
-  // Serial.print(enc2_val);
-  // Serial.print(" b1: ");
-  // Serial.print(b1);
-  // Serial.print(" b2: ");
-  // Serial.print(b2);
-  // Serial.print(" b3: ");
-  // Serial.print(b3);
-  // Serial.print(" b4: ");
-  // Serial.print(b4);
-  // Serial.print(" b5: ");
-  // Serial.print(b5);
-  // Serial.print(" b6: ");
-  // Serial.print(b6);
-  // Serial.println();
-
+  // ACTUAL LOGIC
+  //enc1
   if (b1) { // windows mode
     if (incr1 != 0){
         Keyboard.press(KEY_LEFT_ALT); 
         // if (incr1 < 0) Keyboard.press(KEY_LEFT_SHIFT); //messes up the keyboard layout
-        for (int i=0; i<abs(incr1); i++) Keyboard.press(KEY_ESC);
+        for (int i=0; i < abs(incr1); i++) Keyboard.press(KEY_ESC);
         Keyboard.releaseAll();
       }
   }
@@ -238,6 +222,7 @@ void loop() {
         Keyboard.releaseAll();
       }
   }
+
   //enc2
   // if (clicked2) Consumer.write(MEDIA_PLAY_PAUSE); 
   //control volume
